@@ -156,7 +156,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ============ KONFIGURASI FIELD TAMBAHAN PER JENIS SURAT ============
     const dataTambahanConfig = {
-        DOMISILI: [],
+        DOMISILI: [
+            { key: 'rt_pengantar', label: 'RT (Pengantar)', type: 'text', placeholder: 'Contoh: 04' },
+            { key: 'nomor_surat_rt', label: 'Nomor Surat Pengantar RT', type: 'text', placeholder: 'Contoh: 12/RT 04/RW 01/VI/2026' },
+            { key: 'rw_pengantar', label: 'RW (Pengantar)', type: 'text', placeholder: 'Contoh: 01' },
+            { key: 'nomor_surat_rw', label: 'Nomor Reg. Surat RW', type: 'text', placeholder: 'Contoh: 118/RW 01/VI/2026' },
+        ],
         SKTM: [
             { key: 'nama_anak', label: 'Nama Anak' },
             { key: 'nik_anak', label: 'NIK Anak' },
@@ -222,23 +227,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function renderDataTambahan(jenisSuratId) {
-        const container = document.getElementById('data-tambahan-container');
-        container.innerHTML = '';
-        const jenis = jenisSuratMap[jenisSuratId];
-        if (!jenis) return;
+   function renderDataTambahan(jenisSuratId) {
+    const container = document.getElementById('data-tambahan-container');
+    container.innerHTML = '';
+    const jenis = jenisSuratMap[jenisSuratId];
+    if (!jenis) return;
 
-        const fields = dataTambahanConfig[jenis.kode] || [];
-        fields.forEach(field => {
-            const wrapper = document.createElement('div');
-            wrapper.className = 'flex flex-col gap-1';
-            wrapper.innerHTML = `
-                <label class="font-label-caps text-label-caps text-secondary uppercase">${field.label}</label>
-                <input class="w-full border border-soft-accent bg-surface-bright rounded-lg px-4 py-2" id="dt-${field.key}" type="text">
-            `;
-            container.appendChild(wrapper);
-        });
-    }
+    const fields = dataTambahanConfig[jenis.kode] || [];
+    fields.forEach(field => {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'flex flex-col gap-1';
+        wrapper.innerHTML = `
+            <label class="font-label-caps text-label-caps text-secondary uppercase">${field.label}</label>
+            <input class="w-full border border-soft-accent bg-surface-bright rounded-lg px-4 py-2" id="dt-${field.key}" type="text" placeholder="${field.placeholder || ''}">
+        `;
+        container.appendChild(wrapper);
+    });
+}
 
     document.getElementById('input-type').addEventListener('change', (e) => {
         renderDataTambahan(e.target.value);
