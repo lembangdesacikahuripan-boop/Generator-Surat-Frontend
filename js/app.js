@@ -168,6 +168,10 @@ document.addEventListener('DOMContentLoaded', () => {
             { key: 'tempat_lahir_anak', label: 'Tempat Lahir Anak' },
             { key: 'tanggal_lahir_anak', label: 'Tanggal Lahir Anak' },
             { key: 'alamat_anak', label: 'Alamat Anak' },
+            { key: 'rt_pengantar', label: 'RT (Pengantar)', placeholder: 'Contoh: 04' },
+            { key: 'nomor_surat_rt', label: 'Nomor Surat Pengantar RT', placeholder: 'Contoh: 02/RT 04/RW 08/II/2026' },
+            { key: 'rw_pengantar', label: 'RW (Pengantar)', placeholder: 'Contoh: 08' },
+            { key: 'nomor_surat_rw', label: 'Nomor Reg. Surat RW', placeholder: 'Contoh: 07/RW 08/II/2026' },
         ],
         PINDAH: [
             { key: 'nama_kepala_keluarga', label: 'Nama Kepala Keluarga' },
@@ -182,6 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
             { key: 'bayi_pukul', label: 'Pukul Lahir' },
             { key: 'bayi_hari', label: 'Hari Lahir' },
             { key: 'bayi_anak_ke', label: 'Anak Ke' },
+            { key: 'bayi_alamat', label: 'Alamat Bayi', placeholder: 'Contoh: Kp. Sukalaksana RT 01 RW 02 Desa Cikahuripan Kecamatan Lembang' },
             { key: 'ayah_nama', label: 'Nama Ayah' },
             { key: 'ayah_umur', label: 'Umur Ayah' },
             { key: 'ayah_agama', label: 'Agama Ayah' },
@@ -192,7 +197,8 @@ document.addEventListener('DOMContentLoaded', () => {
             { key: 'ibu_agama', label: 'Agama Ibu' },
             { key: 'ibu_pekerjaan', label: 'Pekerjaan Ibu' },
             { key: 'ibu_alamat', label: 'Alamat Ibu' },
-        ],
+            { key: 'nama_pelapor', label: 'Nama Yang Melaporkan', placeholder: 'Contoh: nama ayah/ibu atau pelapor lain' },
+],
         PENGHASILAN: [
             { key: 'penghasilan', label: 'Penghasilan (misal: Rp 2.000.000 s/d Rp 2.500.000)' },
             { key: 'tanggungan_nama', label: 'Nama Tanggungan' },
@@ -200,6 +206,15 @@ document.addEventListener('DOMContentLoaded', () => {
             { key: 'tanggungan_nik', label: 'NIK Tanggungan' },
             { key: 'tanggungan_tempat_lahir', label: 'Tempat Lahir Tanggungan' },
             { key: 'tanggungan_tanggal_lahir', label: 'Tanggal Lahir Tanggungan' },
+        ],
+        KEMATIAN: [
+            { key: 'umur', label: 'Umur', placeholder: 'Contoh: 45 tahun' },
+            { key: 'hari_meninggal', label: 'Hari Meninggal', placeholder: 'Contoh: Senin' },
+            { key: 'tanggal_meninggal', label: 'Tanggal Meninggal', placeholder: 'Contoh: 2 Februari 2026' },
+            { key: 'tempat_meninggal', label: 'Tempat Meninggal', placeholder: 'Contoh: Kp. Cisaroni RT 04 RW 08 Desa Cikahuripan' },
+            { key: 'penyebab_meninggal', label: 'Disebabkan Karena', placeholder: 'Contoh: Sakit' },
+            { key: 'nama_pelapor', label: 'Nama Yang Melaporkan', placeholder: 'Contoh: Wisnu Kartiwa' },
+            { key: 'hubungan_pelapor', label: 'Hubungan Dengan Yang Meninggal', placeholder: 'Contoh: Anak / Kerabat / Keluarga' },
         ],
     };
 
