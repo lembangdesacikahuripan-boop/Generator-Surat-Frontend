@@ -357,6 +357,24 @@ document.addEventListener("DOMContentLoaded", () => {
         placeholder: "Contoh: 05",
       },
     ],
+    KTP_SEMENTARA: [],
+    SKU: [
+    { key: 'bidang_usaha', label: 'Bidang Usaha', placeholder: 'Contoh: Peternakan' },
+    { key: 'penghasilan', label: 'Penghasilan per Bulan', placeholder: 'Contoh: Rp. 7.000.000,-' },
+    { key: 'lama_usaha', label: 'Lama Usaha', placeholder: 'Contoh: 4 Tahun' },
+    { key: 'tempat_usaha', label: 'Tempat Usaha', placeholder: 'Contoh: Kp. Pojok Girang RT 06 RW 04 Desa Cikahuripan' },
+    { key: 'rt_pengantar', label: 'RT (Pengantar, opsional)', placeholder: 'Contoh: 06' },
+    { key: 'nomor_surat_rt', label: 'Nomor Surat Pengantar RT (opsional)', placeholder: 'Contoh: 04/RT 06/RW 04/II/2026' },
+    { key: 'rw_pengantar', label: 'RW (Pengantar, opsional)', placeholder: 'Contoh: 04' },
+    { key: 'nomor_surat_rw', label: 'Nomor Surat Pengantar RW (opsional)', placeholder: 'Contoh: 05/RW 04/II/2026' },
+    ],
+    BELUM_MENIKAH: [
+    { key: 'nama_pemohon', label: 'Nama Pemohon (opsional, kosongkan jika pemohon = orang yang diterangkan)', placeholder: 'Contoh: nama orang tua yang mengurus' },
+    { key: 'rt_pengantar', label: 'RT (Pengantar, opsional)', placeholder: 'Contoh: 04' },
+    { key: 'nomor_surat_rt', label: 'Nomor Surat Pengantar RT (opsional)', placeholder: 'Contoh: 40/RT 04/RW 09/IV/2026' },
+    { key: 'rw_pengantar', label: 'RW (Pengantar, opsional)', placeholder: 'Contoh: 09' },
+    { key: 'nomor_surat_rw', label: 'Nomor Surat Pengantar RW (opsional)', placeholder: 'Contoh: 07/RW 09/IV/2026' },
+    ],
   };
 
   let jenisSuratMap = {};
@@ -746,19 +764,21 @@ document.addEventListener("DOMContentLoaded", () => {
   // ============ LAPORAN ============
   let semuaSuratCache = [];
 
-  async function muatLaporan() {
-    try {
-      const res = await fetch(`${API_BASE_URL}/api/surat`);
-      const hasil = await res.json();
-      if (!hasil.sukses) return console.error(hasil.pesan);
+  // ============ DOKUMEN BARU ============
+  document.getElementById("btn-dokumen-baru").addEventListener("click", () => {
+    const adaIsian =
+      document.getElementById("input-nik").value.trim() ||
+      document.getElementById("input-type").value ||
+      document.getElementById("input-doc-number").value.trim() ||
+      document.getElementById("input-purpose").value.trim();
 
-      semuaSuratCache = hasil.data;
-      muatFilterJenisLaporan();
-      renderTabelLaporan();
-    } catch (err) {
-      console.error("Error muat laporan:", err);
+    if (adaIsian && !confirm("Form yang sedang diisi akan dikosongkan. Lanjut buat dokumen baru?")) {
+      return;
     }
-  }
+
+    // Muat ulang aplikasi supaya form, pratinjau, dan data surat sebelumnya bersih total
+    window.location.reload();
+  });
 
   function muatFilterJenisLaporan() {
     const select = document.getElementById("filter-jenis-laporan");
@@ -777,7 +797,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  function renderTabelLaporan() {
+    function renderTabelLaporan() {
     const filterJenis = document.getElementById("filter-jenis-laporan").value;
     const filterStatus = document.getElementById("filter-status-laporan").value;
 
@@ -810,17 +830,25 @@ document.addEventListener("DOMContentLoaded", () => {
           ? '<span class="bg-primary/10 text-primary px-2 py-1 rounded-full text-xs font-medium">Disetujui</span>'
           : '<span class="bg-surface-container-high text-secondary px-2 py-1 rounded-full text-xs font-medium">Draft</span>';
 
+      // Kalau data penduduknya sudah terhapus (misal surat kematian), ambil nama dari snapshot
+      const namaPemohon = s.penduduk
+        ? s.penduduk.nama
+        : (s.data_tambahan && s.data_tambahan.snapshot_penduduk
+            ? s.data_tambahan.snapshot_penduduk.nama
+            : "-");
+
       const tr = document.createElement("tr");
       tr.className =
         "border-b border-soft-accent hover:bg-surface-container-low";
       tr.innerHTML = `
                 <td class="p-3 font-body-sm">${s.nomor_surat || "-"}</td>
                 <td class="p-3 font-body-sm">${s.jenis_surat ? s.jenis_surat.nama : "-"}</td>
-                <td class="p-3 font-body-sm">${s.penduduk ? s.penduduk.nama : "-"}</td>
+                <td class="p-3 font-body-sm">${namaPemohon}</td>
                 <td class="p-3 font-body-sm">${tanggal}</td>
                 <td class="p-3 font-body-sm">${statusBadge}</td>
-                <td class="p-3 font-body-sm">
+                <td class="p-3 font-body-sm whitespace-nowrap">
                     <button class="text-primary hover:underline cursor-pointer" data-lihat-id="${s.id}">Lihat PDF</button>
+                    <button class="text-red-600 hover:underline cursor-pointer ml-3" data-hapus-id="${s.id}">Hapus</button>
                 </td>
             `;
       tbody.appendChild(tr);
@@ -832,6 +860,45 @@ document.addEventListener("DOMContentLoaded", () => {
           `${API_BASE_URL}/api/surat/${btn.dataset.lihatId}/pdf`,
           "_blank",
         );
+      });
+    });
+
+    tbody.querySelectorAll("[data-hapus-id]").forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        const id = btn.dataset.hapusId;
+        const surat = semuaSuratCache.find((s) => s.id === id);
+        const jenis = surat && surat.jenis_surat ? surat.jenis_surat.nama : "surat ini";
+        const nomor = surat && surat.nomor_surat ? ` (Nomor: ${surat.nomor_surat})` : "";
+
+        let pesan = `Yakin mau menghapus ${jenis}${nomor}?\n\nData yang sudah dihapus tidak bisa dikembalikan.`;
+        if (surat && surat.jenis_surat && surat.jenis_surat.kode === "KEMATIAN" && surat.status === "disetujui") {
+          pesan += "\n\nPERHATIAN: data penduduk untuk surat kematian ini sudah terhapus. Surat ini adalah satu-satunya catatan yang tersisa.";
+        }
+        if (!confirm(pesan)) return;
+
+        btn.disabled = true;
+        btn.textContent = "Menghapus...";
+
+        try {
+          const res = await fetch(`${API_BASE_URL}/api/surat/${id}`, { method: "DELETE" });
+          const hasil = await res.json();
+
+          if (!hasil.sukses) {
+            alert("Gagal menghapus surat: " + hasil.pesan);
+            btn.disabled = false;
+            btn.textContent = "Hapus";
+            return;
+          }
+
+          // Buang dari cache, lalu gambar ulang tabel & angka ringkasan
+          semuaSuratCache = semuaSuratCache.filter((s) => s.id !== id);
+          renderTabelLaporan();
+        } catch (err) {
+          console.error("Error hapus surat:", err);
+          alert("Gagal menghapus surat. Cek koneksi ke server.");
+          btn.disabled = false;
+          btn.textContent = "Hapus";
+        }
       });
     });
   }
