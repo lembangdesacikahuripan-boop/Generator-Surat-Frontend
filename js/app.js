@@ -761,10 +761,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // ============ LAPORAN ============
-  let semuaSuratCache = [];
-
-  // ============ DOKUMEN BARU ============
+    // ============ DOKUMEN BARU ============
   document.getElementById("btn-dokumen-baru").addEventListener("click", () => {
     const adaIsian =
       document.getElementById("input-nik").value.trim() ||
@@ -779,6 +776,23 @@ document.addEventListener("DOMContentLoaded", () => {
     // Muat ulang aplikasi supaya form, pratinjau, dan data surat sebelumnya bersih total
     window.location.reload();
   });
+
+  // ============ LAPORAN ============
+  let semuaSuratCache = [];
+
+  async function muatLaporan() {
+    try {
+      const res = await fetch(`${API_BASE_URL}/api/surat`);
+      const hasil = await res.json();
+      if (!hasil.sukses) return console.error(hasil.pesan);
+
+      semuaSuratCache = hasil.data;
+      muatFilterJenisLaporan();
+      renderTabelLaporan();
+    } catch (err) {
+      console.error("Error muat laporan:", err);
+    }
+  }
 
   function muatFilterJenisLaporan() {
     const select = document.getElementById("filter-jenis-laporan");
