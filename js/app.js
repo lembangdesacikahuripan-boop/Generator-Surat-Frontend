@@ -375,6 +375,34 @@ document.addEventListener("DOMContentLoaded", () => {
     { key: 'rw_pengantar', label: 'RW (Pengantar, opsional)', placeholder: 'Contoh: 09' },
     { key: 'nomor_surat_rw', label: 'Nomor Surat Pengantar RW (opsional)', placeholder: 'Contoh: 07/RW 09/IV/2026' },
     ],
+    HARGA_TANAH: [
+    { key: 'lokasi_tanah', label: 'Lokasi/Desa/Jalan', placeholder: 'Contoh: Kp. Karamat RT 02 RW 07 Desa Cikahuripan Kecamatan Lembang Kabupaten Bandung Barat' },
+    { key: 'jenis_bukti', label: 'Jenis Bukti Kepemilikan', placeholder: 'Isi: SHM atau AJB' },
+    { key: 'nama_pemilik', label: 'Nama Pemilik', placeholder: 'Contoh: Surya Gumilar' },
+    { key: 'nomor_bukti', label: 'Nomor Sertifikat / AJB', placeholder: 'Contoh: NIB 10.31.000034165.0 atau 97/2022' },
+    { key: 'luas_tanah', label: 'Luas Tanah (M2)', placeholder: 'Contoh: 75' },
+    { key: 'harga_per_meter', label: 'Harga per M2', placeholder: 'Contoh: Rp 3.500.000 s/d Rp 4.000.000' },
+    { key: 'harga_bangunan', label: 'Harga Bangunan (opsional)', placeholder: 'Contoh: Rp 150.000.000 s/d Rp 200.000.000' },
+    ],
+    AHLI_WARIS: [
+    { key: 'pewaris', label: 'Nama Pewaris (yang meninggal)', placeholder: 'Contoh: Almarhumah EMAY' },
+    { key: 'tanggal_meninggal', label: 'Tanggal Meninggal', placeholder: 'Contoh: 08-09-2019' },
+    { key: 'tempat_meninggal', label: 'Tempat Meninggal', placeholder: 'Contoh: Kp. Sukamekar RT 01 RW 10 Desa Cikahuripan' },
+    {
+      key: 'ahli_waris', label: 'Daftar Ahli Waris', type: 'list', wajib: true, tombol: 'Tambah Ahli Waris',
+      kolom: [
+        { key: 'nama', placeholder: 'Nama' },
+        { key: 'umur', placeholder: 'Umur (angka)' },
+        { key: 'hubungan', placeholder: 'Hubungan (misal: Anak)' },
+        { key: 'alamat', placeholder: 'Alamat' },
+      ],
+    },
+    { key: 'keterangan_tanah', label: 'Keterangan Tanah Warisan (opsional)', type: 'textarea', placeholder: 'Contoh: yang terletak di Blok Cisaroni Desa Cikahuripan Kecamatan Lembang, sebagaimana tercatat dalam Sertifikat Hak Milik Nomor: 01209, Luas: 201 m2, tercatat Atas Nama AEP SAEPUDIN' },
+    { key: 'rt_saksi', label: 'RT (Saksi)', placeholder: 'Contoh: 01' },
+    { key: 'nama_ketua_rt', label: 'Nama Ketua RT (opsional)', placeholder: 'Kosongkan jika ditulis tangan' },
+    { key: 'rw_saksi', label: 'RW (Saksi)', placeholder: 'Contoh: 10' },
+    { key: 'nama_ketua_rw', label: 'Nama Ketua RW (opsional)', placeholder: 'Kosongkan jika ditulis tangan' },
+],
   };
 
   let jenisSuratMap = {};
@@ -401,6 +429,25 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+    // Satu baris isian untuk field bertipe "list" (misal: satu ahli waris)
+  function buatBarisList(field) {
+    const baris = document.createElement("div");
+    baris.className = "baris-list flex gap-2 items-start border border-soft-accent rounded-lg p-2";
+    const inputs = field.kolom
+      .map(
+        (k) =>
+          `<input class="border border-soft-accent bg-surface-bright rounded-lg px-3 py-2 min-w-0" data-kolom="${k.key}" type="text" placeholder="${k.placeholder || ""}">`,
+      )
+      .join("");
+    baris.innerHTML = `
+      <div class="grid grid-cols-2 gap-2 flex-1">${inputs}</div>
+      <button type="button" class="btn-hapus-baris text-red-600 p-2 cursor-pointer" title="Hapus baris">
+        <span class="material-symbols-outlined">delete</span>
+      </button>`;
+    baris.querySelector(".btn-hapus-baris").addEventListener("click", () => baris.remove());
+    return baris;
+  }
+
   function renderDataTambahan(jenisSuratId) {
     const container = document.getElementById("data-tambahan-container");
     container.innerHTML = "";
@@ -411,10 +458,24 @@ document.addEventListener("DOMContentLoaded", () => {
     fields.forEach((field) => {
       const wrapper = document.createElement("div");
       wrapper.className = "flex flex-col gap-1";
-      wrapper.innerHTML = `
-            <label class="font-label-caps text-label-caps text-secondary uppercase">${field.label}</label>
-            <input class="w-full border border-soft-accent bg-surface-bright rounded-lg px-4 py-2" id="dt-${field.key}" type="text" placeholder="${field.placeholder || ""}">
-        `;
+      const label = `<label class="font-label-caps text-label-caps text-secondary uppercase">${field.label}</label>`;
+
+      if (field.type === "list") {
+        wrapper.innerHTML = `${label}
+          <div class="flex flex-col gap-2" id="dt-${field.key}"></div>
+          <button type="button" class="btn-tambah-baris self-start text-primary font-title-sm hover:underline cursor-pointer mt-1">+ ${field.tombol || "Tambah Baris"}</button>`;
+        const daftar = wrapper.querySelector(`#dt-${field.key}`);
+        daftar.appendChild(buatBarisList(field)); // mulai dengan 1 baris kosong
+        wrapper.querySelector(".btn-tambah-baris").addEventListener("click", () => {
+          daftar.appendChild(buatBarisList(field));
+        });
+      } else if (field.type === "textarea") {
+        wrapper.innerHTML = `${label}
+          <textarea class="w-full border border-soft-accent bg-surface-bright rounded-lg px-4 py-2 min-h-[90px]" id="dt-${field.key}" placeholder="${field.placeholder || ""}"></textarea>`;
+      } else {
+        wrapper.innerHTML = `${label}
+          <input class="w-full border border-soft-accent bg-surface-bright rounded-lg px-4 py-2" id="dt-${field.key}" type="text" placeholder="${field.placeholder || ""}">`;
+      }
       container.appendChild(wrapper);
     });
   }
@@ -497,10 +558,27 @@ document.addEventListener("DOMContentLoaded", () => {
       const jenis = jenisSuratMap[jenisSuratId];
       const fields = dataTambahanConfig[jenis.kode] || [];
       const dataTambahan = {};
-      fields.forEach((field) => {
+            fields.forEach((field) => {
+        if (field.type === "list") {
+          const isi = [];
+          document.querySelectorAll(`#dt-${field.key} .baris-list`).forEach((baris) => {
+            const obj = {};
+            baris.querySelectorAll("[data-kolom]").forEach((inp) => {
+              obj[inp.dataset.kolom] = inp.value.trim();
+            });
+            if (Object.values(obj).some((v) => v)) isi.push(obj); // lewati baris yang kosong semua
+          });
+          dataTambahan[field.key] = isi;
+          return;
+        }
         const el = document.getElementById(`dt-${field.key}`);
         if (el) dataTambahan[field.key] = el.value;
       });
+
+      const listKosong = fields.find(
+        (f) => f.type === "list" && f.wajib && dataTambahan[f.key].length === 0,
+      );
+      if (listKosong) return alert(`${listKosong.label} minimal diisi 1 orang`);
 
       try {
         const res = await fetch(`${API_BASE_URL}/api/surat`, {

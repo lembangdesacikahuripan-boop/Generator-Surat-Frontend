@@ -5,4 +5,4 @@ const supabaseClient = window.supabase.createClient(
   SUPABASE_URL,
   SUPABASE_ANON_KEY,
 );
-const API_BASE_URL = "https://sistem-persuratan-sauyunan-backend-production.up.railway.app";
+const API_BASE_URL = "http://localhost:3000";
