@@ -359,50 +359,195 @@ document.addEventListener("DOMContentLoaded", () => {
     ],
     KTP_SEMENTARA: [],
     SKU: [
-    { key: 'bidang_usaha', label: 'Bidang Usaha', placeholder: 'Contoh: Peternakan' },
-    { key: 'penghasilan', label: 'Penghasilan per Bulan', placeholder: 'Contoh: Rp. 7.000.000,-' },
-    { key: 'lama_usaha', label: 'Lama Usaha', placeholder: 'Contoh: 4 Tahun' },
-    { key: 'tempat_usaha', label: 'Tempat Usaha', placeholder: 'Contoh: Kp. Pojok Girang RT 06 RW 04 Desa Cikahuripan' },
-    { key: 'rt_pengantar', label: 'RT (Pengantar, opsional)', placeholder: 'Contoh: 06' },
-    { key: 'nomor_surat_rt', label: 'Nomor Surat Pengantar RT (opsional)', placeholder: 'Contoh: 04/RT 06/RW 04/II/2026' },
-    { key: 'rw_pengantar', label: 'RW (Pengantar, opsional)', placeholder: 'Contoh: 04' },
-    { key: 'nomor_surat_rw', label: 'Nomor Surat Pengantar RW (opsional)', placeholder: 'Contoh: 05/RW 04/II/2026' },
+      {
+        key: "bidang_usaha",
+        label: "Bidang Usaha",
+        placeholder: "Contoh: Peternakan",
+      },
+      {
+        key: "penghasilan",
+        label: "Penghasilan per Bulan",
+        placeholder: "Contoh: Rp. 7.000.000,-",
+      },
+      {
+        key: "lama_usaha",
+        label: "Lama Usaha",
+        placeholder: "Contoh: 4 Tahun",
+      },
+      {
+        key: "tempat_usaha",
+        label: "Tempat Usaha",
+        placeholder: "Contoh: Kp. Pojok Girang RT 06 RW 04 Desa Cikahuripan",
+      },
+      {
+        key: "rt_pengantar",
+        label: "RT (Pengantar, opsional)",
+        placeholder: "Contoh: 06",
+      },
+      {
+        key: "nomor_surat_rt",
+        label: "Nomor Surat Pengantar RT (opsional)",
+        placeholder: "Contoh: 04/RT 06/RW 04/II/2026",
+      },
+      {
+        key: "rw_pengantar",
+        label: "RW (Pengantar, opsional)",
+        placeholder: "Contoh: 04",
+      },
+      {
+        key: "nomor_surat_rw",
+        label: "Nomor Surat Pengantar RW (opsional)",
+        placeholder: "Contoh: 05/RW 04/II/2026",
+      },
     ],
     BELUM_MENIKAH: [
-    { key: 'nama_pemohon', label: 'Nama Pemohon (opsional, kosongkan jika pemohon = orang yang diterangkan)', placeholder: 'Contoh: nama orang tua yang mengurus' },
-    { key: 'rt_pengantar', label: 'RT (Pengantar, opsional)', placeholder: 'Contoh: 04' },
-    { key: 'nomor_surat_rt', label: 'Nomor Surat Pengantar RT (opsional)', placeholder: 'Contoh: 40/RT 04/RW 09/IV/2026' },
-    { key: 'rw_pengantar', label: 'RW (Pengantar, opsional)', placeholder: 'Contoh: 09' },
-    { key: 'nomor_surat_rw', label: 'Nomor Surat Pengantar RW (opsional)', placeholder: 'Contoh: 07/RW 09/IV/2026' },
+      {
+        key: "nama_pemohon",
+        label:
+          "Nama Pemohon (opsional, kosongkan jika pemohon = orang yang diterangkan)",
+        placeholder: "Contoh: nama orang tua yang mengurus",
+      },
+      {
+        key: "rt_pengantar",
+        label: "RT (Pengantar, opsional)",
+        placeholder: "Contoh: 04",
+      },
+      {
+        key: "nomor_surat_rt",
+        label: "Nomor Surat Pengantar RT (opsional)",
+        placeholder: "Contoh: 40/RT 04/RW 09/IV/2026",
+      },
+      {
+        key: "rw_pengantar",
+        label: "RW (Pengantar, opsional)",
+        placeholder: "Contoh: 09",
+      },
+      {
+        key: "nomor_surat_rw",
+        label: "Nomor Surat Pengantar RW (opsional)",
+        placeholder: "Contoh: 07/RW 09/IV/2026",
+      },
     ],
     HARGA_TANAH: [
-    { key: 'lokasi_tanah', label: 'Lokasi/Desa/Jalan', placeholder: 'Contoh: Kp. Karamat RT 02 RW 07 Desa Cikahuripan Kecamatan Lembang Kabupaten Bandung Barat' },
-    { key: 'jenis_bukti', label: 'Jenis Bukti Kepemilikan', placeholder: 'Isi: SHM atau AJB' },
-    { key: 'nama_pemilik', label: 'Nama Pemilik', placeholder: 'Contoh: Surya Gumilar' },
-    { key: 'nomor_bukti', label: 'Nomor Sertifikat / AJB', placeholder: 'Contoh: NIB 10.31.000034165.0 atau 97/2022' },
-    { key: 'luas_tanah', label: 'Luas Tanah (M2)', placeholder: 'Contoh: 75' },
-    { key: 'harga_per_meter', label: 'Harga per M2', placeholder: 'Contoh: Rp 3.500.000 s/d Rp 4.000.000' },
-    { key: 'harga_bangunan', label: 'Harga Bangunan (opsional)', placeholder: 'Contoh: Rp 150.000.000 s/d Rp 200.000.000' },
+      {
+        key: "lokasi_tanah",
+        label: "Lokasi/Desa/Jalan",
+        placeholder:
+          "Contoh: Kp. Karamat RT 02 RW 07 Desa Cikahuripan Kecamatan Lembang Kabupaten Bandung Barat",
+      },
+      {
+        key: "jenis_bukti",
+        label: "Jenis Bukti Kepemilikan",
+        placeholder: "Isi: SHM atau AJB",
+      },
+      {
+        key: "nama_pemilik",
+        label: "Nama Pemilik",
+        placeholder: "Contoh: Surya Gumilar",
+      },
+      {
+        key: "nomor_bukti",
+        label: "Nomor Sertifikat / AJB",
+        placeholder: "Contoh: NIB 10.31.000034165.0 atau 97/2022",
+      },
+      {
+        key: "luas_tanah",
+        label: "Luas Tanah (M2)",
+        placeholder: "Contoh: 75",
+      },
+      {
+        key: "harga_per_meter",
+        label: "Harga per M2",
+        placeholder: "Contoh: Rp 3.500.000 s/d Rp 4.000.000",
+      },
+      {
+        key: "harga_bangunan",
+        label: "Harga Bangunan (opsional)",
+        placeholder: "Contoh: Rp 150.000.000 s/d Rp 200.000.000",
+      },
     ],
     AHLI_WARIS: [
-    { key: 'pewaris', label: 'Nama Pewaris (yang meninggal)', placeholder: 'Contoh: Almarhumah EMAY' },
-    { key: 'tanggal_meninggal', label: 'Tanggal Meninggal', placeholder: 'Contoh: 08-09-2019' },
-    { key: 'tempat_meninggal', label: 'Tempat Meninggal', placeholder: 'Contoh: Kp. Sukamekar RT 01 RW 10 Desa Cikahuripan' },
-    {
-      key: 'ahli_waris', label: 'Daftar Ahli Waris', type: 'list', wajib: true, tombol: 'Tambah Ahli Waris',
-      kolom: [
-        { key: 'nama', placeholder: 'Nama' },
-        { key: 'umur', placeholder: 'Umur (angka)' },
-        { key: 'hubungan', placeholder: 'Hubungan (misal: Anak)' },
-        { key: 'alamat', placeholder: 'Alamat' },
-      ],
-    },
-    { key: 'keterangan_tanah', label: 'Keterangan Tanah Warisan (opsional)', type: 'textarea', placeholder: 'Contoh: yang terletak di Blok Cisaroni Desa Cikahuripan Kecamatan Lembang, sebagaimana tercatat dalam Sertifikat Hak Milik Nomor: 01209, Luas: 201 m2, tercatat Atas Nama AEP SAEPUDIN' },
-    { key: 'rt_saksi', label: 'RT (Saksi)', placeholder: 'Contoh: 01' },
-    { key: 'nama_ketua_rt', label: 'Nama Ketua RT (opsional)', placeholder: 'Kosongkan jika ditulis tangan' },
-    { key: 'rw_saksi', label: 'RW (Saksi)', placeholder: 'Contoh: 10' },
-    { key: 'nama_ketua_rw', label: 'Nama Ketua RW (opsional)', placeholder: 'Kosongkan jika ditulis tangan' },
-],
+      {
+        key: "pewaris",
+        label: "Nama Pewaris (yang meninggal)",
+        placeholder: "Contoh: Almarhumah EMAY",
+      },
+      {
+        key: "tanggal_meninggal",
+        label: "Tanggal Meninggal",
+        placeholder: "Contoh: 08-09-2019",
+      },
+      {
+        key: "tempat_meninggal",
+        label: "Tempat Meninggal",
+        placeholder: "Contoh: Kp. Sukamekar RT 01 RW 10 Desa Cikahuripan",
+      },
+      {
+        key: "ahli_waris",
+        label: "Daftar Ahli Waris",
+        type: "list",
+        wajib: true,
+        tombol: "Tambah Ahli Waris",
+        kolom: [
+          { key: "nama", placeholder: "Nama" },
+          { key: "umur", placeholder: "Umur (angka)" },
+          { key: "hubungan", placeholder: "Hubungan (misal: Anak)" },
+          { key: "alamat", placeholder: "Alamat" },
+        ],
+      },
+      {
+        key: "keterangan_tanah",
+        label: "Keterangan Tanah Warisan (opsional)",
+        type: "textarea",
+        placeholder:
+          "Contoh: yang terletak di Blok Cisaroni Desa Cikahuripan Kecamatan Lembang, sebagaimana tercatat dalam Sertifikat Hak Milik Nomor: 01209, Luas: 201 m2, tercatat Atas Nama AEP SAEPUDIN",
+      },
+      { key: "rt_saksi", label: "RT (Saksi)", placeholder: "Contoh: 01" },
+      {
+        key: "nama_ketua_rt",
+        label: "Nama Ketua RT (opsional)",
+        placeholder: "Kosongkan jika ditulis tangan",
+      },
+      { key: "rw_saksi", label: "RW (Saksi)", placeholder: "Contoh: 10" },
+      {
+        key: "nama_ketua_rw",
+        label: "Nama Ketua RW (opsional)",
+        placeholder: "Kosongkan jika ditulis tangan",
+      },
+    ],
+    PERSYARATAN_NIKAH: [
+      {
+        key: "hari_tanggal_akad",
+        label: "Akad Nikah Dilaksanakan Pada",
+        placeholder: "Contoh: Minggu, 06 September 2026",
+      },
+      {
+        key: "tempat_akad",
+        label: "Alamat/Tempat Akad Nikah",
+        placeholder: "Contoh: Kp. Karamat RT 02 RW 06 Desa Cikahuripan",
+      },
+      {
+        key: "maskawin",
+        label: "Maskawin",
+        placeholder: "Contoh: Seperangkat alat salat",
+      },
+      { key: "jam_akad", label: "Jam Akad", placeholder: "Contoh: 09.00 WIB" },
+      { key: "ayah_pria", label: "Nama Ayah Catin Pria" },
+      { key: "ibu_pria", label: "Nama Ibu Catin Pria" },
+      { key: "telp_pria", label: "No. Telp Catin Pria" },
+      { key: "email_pria", label: "E-mail Catin Pria" },
+      { key: "ayah_wanita", label: "Nama Ayah Catin Wanita" },
+      { key: "ibu_wanita", label: "Nama Ibu Catin Wanita" },
+      { key: "telp_wanita", label: "No. Telp Catin Wanita" },
+      { key: "email_wanita", label: "E-mail Catin Wanita" },
+      { key: "telp_wali", label: "No. Telp Wali" },
+      { key: "tanggal_daftar", label: "Tanggal Daftar (opsional)" },
+      { key: "tanggal_nikah", label: "Tanggal Nikah (opsional)" },
+      { key: "nomor_akta_nikah", label: "Nomor Akta Nikah (opsional)" },
+      { key: "nomor_porporasi", label: "Nomor Porporasi (opsional)" },
+      { key: "hp_catin", label: "Nomor HP Catin (opsional)" },
+      { key: "nomor_billing", label: "Nomor Billing (opsional)" },
+    ],
   };
 
   let jenisSuratMap = {};
@@ -429,10 +574,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-    // Satu baris isian untuk field bertipe "list" (misal: satu ahli waris)
+  // Satu baris isian untuk field bertipe "list" (misal: satu ahli waris)
   function buatBarisList(field) {
     const baris = document.createElement("div");
-    baris.className = "baris-list flex gap-2 items-start border border-soft-accent rounded-lg p-2";
+    baris.className =
+      "baris-list flex gap-2 items-start border border-soft-accent rounded-lg p-2";
     const inputs = field.kolom
       .map(
         (k) =>
@@ -444,8 +590,41 @@ document.addEventListener("DOMContentLoaded", () => {
       <button type="button" class="btn-hapus-baris text-red-600 p-2 cursor-pointer" title="Hapus baris">
         <span class="material-symbols-outlined">delete</span>
       </button>`;
-    baris.querySelector(".btn-hapus-baris").addEventListener("click", () => baris.remove());
+    baris
+      .querySelector(".btn-hapus-baris")
+      .addEventListener("click", () => baris.remove());
     return baris;
+  }
+
+  // Jenis surat yang TIDAK memakai kolom Keperluan (kolomnya disembunyikan di form)
+  const TANPA_KEPERLUAN = [
+    "KEMATIAN",
+    "KELAHIRAN",
+    "PINDAH",
+    "KTP_SEMENTARA",
+    "HARGA_TANAH",
+    "PERSYARATAN_NIKAH",
+  ];
+
+  function suratPakaiKeperluan(jenis) {
+    return jenis && !TANPA_KEPERLUAN.includes(jenis.kode);
+  }
+
+  // Jenis surat yang TIDAK punya nomor surat (kolom Nomor disembunyikan & tidak wajib)
+  const TANPA_NOMOR = ["PERSYARATAN_NIKAH"];
+
+  function aturKolomKeperluan(jenisSuratId) {
+    const jenis = jenisSuratMap[jenisSuratId];
+
+    const inputKeperluan = document.getElementById("input-purpose");
+    const tampilKeperluan = !jenis || suratPakaiKeperluan(jenis);
+    inputKeperluan.closest("div").style.display = tampilKeperluan ? "" : "none";
+    if (!tampilKeperluan) inputKeperluan.value = "";
+
+    const inputNomor = document.getElementById("input-doc-number");
+    const tampilNomor = !jenis || !TANPA_NOMOR.includes(jenis.kode);
+    inputNomor.closest("div").style.display = tampilNomor ? "" : "none";
+    if (!tampilNomor) inputNomor.value = "";
   }
 
   function renderDataTambahan(jenisSuratId) {
@@ -466,9 +645,11 @@ document.addEventListener("DOMContentLoaded", () => {
           <button type="button" class="btn-tambah-baris self-start text-primary font-title-sm hover:underline cursor-pointer mt-1">+ ${field.tombol || "Tambah Baris"}</button>`;
         const daftar = wrapper.querySelector(`#dt-${field.key}`);
         daftar.appendChild(buatBarisList(field)); // mulai dengan 1 baris kosong
-        wrapper.querySelector(".btn-tambah-baris").addEventListener("click", () => {
-          daftar.appendChild(buatBarisList(field));
-        });
+        wrapper
+          .querySelector(".btn-tambah-baris")
+          .addEventListener("click", () => {
+            daftar.appendChild(buatBarisList(field));
+          });
       } else if (field.type === "textarea") {
         wrapper.innerHTML = `${label}
           <textarea class="w-full border border-soft-accent bg-surface-bright rounded-lg px-4 py-2 min-h-[90px]" id="dt-${field.key}" placeholder="${field.placeholder || ""}"></textarea>`;
@@ -482,6 +663,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.getElementById("input-type").addEventListener("change", (e) => {
     renderDataTambahan(e.target.value);
+    aturKolomKeperluan(e.target.value);
   });
 
   document
@@ -556,18 +738,23 @@ document.addEventListener("DOMContentLoaded", () => {
         return alert("Pilih jenis dokumen dan isi NIK terlebih dahulu");
 
       const jenis = jenisSuratMap[jenisSuratId];
+      if (suratPakaiKeperluan(jenis) && !keperluan.trim()) {
+        return alert("Isi kolom Keperluan terlebih dahulu");
+      }
       const fields = dataTambahanConfig[jenis.kode] || [];
       const dataTambahan = {};
-            fields.forEach((field) => {
+      fields.forEach((field) => {
         if (field.type === "list") {
           const isi = [];
-          document.querySelectorAll(`#dt-${field.key} .baris-list`).forEach((baris) => {
-            const obj = {};
-            baris.querySelectorAll("[data-kolom]").forEach((inp) => {
-              obj[inp.dataset.kolom] = inp.value.trim();
+          document
+            .querySelectorAll(`#dt-${field.key} .baris-list`)
+            .forEach((baris) => {
+              const obj = {};
+              baris.querySelectorAll("[data-kolom]").forEach((inp) => {
+                obj[inp.dataset.kolom] = inp.value.trim();
+              });
+              if (Object.values(obj).some((v) => v)) isi.push(obj); // lewati baris yang kosong semua
             });
-            if (Object.values(obj).some((v) => v)) isi.push(obj); // lewati baris yang kosong semua
-          });
           dataTambahan[field.key] = isi;
           return;
         }
@@ -610,7 +797,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!currentSuratId) return alert("Buat pratinjau terlebih dahulu");
 
     const nomorSurat = document.getElementById("input-doc-number").value.trim();
-    if (!nomorSurat) return alert("Isi nomor surat terlebih dahulu");
+    const jenisAktif =
+      jenisSuratMap[document.getElementById("input-type").value];
+    const tanpaNomor = jenisAktif && TANPA_NOMOR.includes(jenisAktif.kode);
+    if (!nomorSurat && !tanpaNomor)
+      return alert("Isi nomor surat terlebih dahulu");
 
     const namaPenandatangan = document
       .getElementById("input-nama-penandatangan")
@@ -619,7 +810,8 @@ document.addEventListener("DOMContentLoaded", () => {
       .getElementById("input-jabatan-penandatangan")
       .value.trim();
 
-    const payload = { nomor_surat: nomorSurat };
+    const payload = {};
+    if (nomorSurat) payload.nomor_surat = nomorSurat;
     if (namaPenandatangan && jabatanPenandatangan) {
       payload.nama_penandatangan = namaPenandatangan;
       payload.jabatan_penandatangan = jabatanPenandatangan;
@@ -645,7 +837,133 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // ============ DRAF FORM (isian tidak hilang saat refresh) ============
+  const KUNCI_DRAF = "sauyunan_draf_surat";
+  const FIELD_UTAMA = [
+    "input-nik",
+    "input-name",
+    "input-type",
+    "input-doc-number",
+    "input-purpose",
+    "input-nama-penandatangan",
+    "input-jabatan-penandatangan",
+  ];
+  let lewatiSimpanDraf = false;
+
+  function simpanDraf() {
+    if (lewatiSimpanDraf) return;
+    const draf = { utama: {}, tambahan: {}, list: {}, currentSuratId };
+
+    FIELD_UTAMA.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) draf.utama[id] = el.value;
+    });
+
+    // Field tambahan biasa (input & textarea)
+    document
+      .querySelectorAll(
+        "#data-tambahan-container input[id^='dt-'], #data-tambahan-container textarea[id^='dt-']",
+      )
+      .forEach((el) => (draf.tambahan[el.id] = el.value));
+
+    // Field tambahan bertipe daftar (misal daftar ahli waris)
+    document
+      .querySelectorAll("#data-tambahan-container div[id^='dt-']")
+      .forEach((daftar) => {
+        draf.list[daftar.id] = [...daftar.querySelectorAll(".baris-list")].map(
+          (baris) => {
+            const obj = {};
+            baris
+              .querySelectorAll("[data-kolom]")
+              .forEach((inp) => (obj[inp.dataset.kolom] = inp.value));
+            return obj;
+          },
+        );
+      });
+
+    try {
+      localStorage.setItem(KUNCI_DRAF, JSON.stringify(draf));
+    } catch (e) {
+      console.warn("Draf tidak bisa disimpan:", e);
+    }
+  }
+
+  function pulihkanDraf() {
+    let draf = null;
+    try {
+      draf = JSON.parse(localStorage.getItem(KUNCI_DRAF));
+    } catch (e) {
+      return;
+    }
+    if (!draf) return;
+
+    const selectJenis = document.getElementById("input-type");
+    const jenisTersimpan = draf.utama && draf.utama["input-type"];
+    let percobaan = 0;
+
+    // Tunggu daftar jenis surat selesai dimuat dari server dulu (maks. ~5 detik)
+    const tunggu = setInterval(() => {
+      percobaan++;
+      const opsiSiap =
+        !jenisTersimpan ||
+        [...selectJenis.options].some((o) => o.value === jenisTersimpan);
+      if (!opsiSiap && percobaan < 50) return;
+      clearInterval(tunggu);
+
+      FIELD_UTAMA.forEach((id) => {
+        const el = document.getElementById(id);
+        if (el && draf.utama[id] !== undefined) el.value = draf.utama[id];
+      });
+
+      if (jenisTersimpan) {
+        renderDataTambahan(jenisTersimpan);
+        if (typeof aturKolomKeperluan === "function")
+          aturKolomKeperluan(jenisTersimpan);
+      }
+
+      // Pulihkan baris-baris field daftar
+      Object.entries(draf.list || {}).forEach(([idDaftar, barisList]) => {
+        const daftar = document.getElementById(idDaftar);
+        if (!daftar || !barisList.length) return;
+        const tombolTambah =
+          daftar.parentElement.querySelector(".btn-tambah-baris");
+        daftar.innerHTML = "";
+        barisList.forEach(() => tombolTambah.click());
+        [...daftar.querySelectorAll(".baris-list")].forEach((baris, i) => {
+          baris.querySelectorAll("[data-kolom]").forEach((inp) => {
+            inp.value = barisList[i][inp.dataset.kolom] || "";
+          });
+        });
+      });
+
+      // Pulihkan field tambahan biasa
+      Object.entries(draf.tambahan || {}).forEach(([id, nilai]) => {
+        const el = document.getElementById(id);
+        if (el) el.value = nilai;
+      });
+
+      // Pulihkan pratinjau surat yang sudah dibuat
+      if (draf.currentSuratId) {
+        currentSuratId = draf.currentSuratId;
+        document.getElementById("preview-placeholder").classList.add("hidden");
+        const iframe = document.getElementById("preview-iframe");
+        iframe.classList.remove("hidden");
+        iframe.src = `${API_BASE_URL}/api/surat/${currentSuratId}/preview`;
+      }
+    }, 100);
+  }
+
+  // Simpan tiap kali ada isian yang berubah, dan tepat sebelum halaman di-refresh/ditutup
+  document
+    .querySelector("#generator form")
+    .addEventListener("input", simpanDraf);
+  document
+    .querySelector("#generator form")
+    .addEventListener("change", simpanDraf);
+  window.addEventListener("beforeunload", simpanDraf);
+
   muatJenisSurat();
+  pulihkanDraf();
 
   // ============ DATA PENDUDUK: LIST ============
   let semuaPendudukCache = []; // simpan data lengkap, dipakai untuk filter pencarian
@@ -839,7 +1157,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-    // ============ DOKUMEN BARU ============
+  // ============ DOKUMEN BARU ============
   document.getElementById("btn-dokumen-baru").addEventListener("click", () => {
     const adaIsian =
       document.getElementById("input-nik").value.trim() ||
@@ -847,11 +1165,18 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("input-doc-number").value.trim() ||
       document.getElementById("input-purpose").value.trim();
 
-    if (adaIsian && !confirm("Form yang sedang diisi akan dikosongkan. Lanjut buat dokumen baru?")) {
+    if (
+      adaIsian &&
+      !confirm(
+        "Form yang sedang diisi akan dikosongkan. Lanjut buat dokumen baru?",
+      )
+    ) {
       return;
     }
 
     // Muat ulang aplikasi supaya form, pratinjau, dan data surat sebelumnya bersih total
+    lewatiSimpanDraf = true;
+    localStorage.removeItem(KUNCI_DRAF);
     window.location.reload();
   });
 
@@ -889,7 +1214,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-    function renderTabelLaporan() {
+  function renderTabelLaporan() {
     const filterJenis = document.getElementById("filter-jenis-laporan").value;
     const filterStatus = document.getElementById("filter-status-laporan").value;
 
@@ -925,9 +1250,9 @@ document.addEventListener("DOMContentLoaded", () => {
       // Kalau data penduduknya sudah terhapus (misal surat kematian), ambil nama dari snapshot
       const namaPemohon = s.penduduk
         ? s.penduduk.nama
-        : (s.data_tambahan && s.data_tambahan.snapshot_penduduk
-            ? s.data_tambahan.snapshot_penduduk.nama
-            : "-");
+        : s.data_tambahan && s.data_tambahan.snapshot_penduduk
+          ? s.data_tambahan.snapshot_penduduk.nama
+          : "-";
 
       const tr = document.createElement("tr");
       tr.className =
@@ -959,12 +1284,20 @@ document.addEventListener("DOMContentLoaded", () => {
       btn.addEventListener("click", async () => {
         const id = btn.dataset.hapusId;
         const surat = semuaSuratCache.find((s) => s.id === id);
-        const jenis = surat && surat.jenis_surat ? surat.jenis_surat.nama : "surat ini";
-        const nomor = surat && surat.nomor_surat ? ` (Nomor: ${surat.nomor_surat})` : "";
+        const jenis =
+          surat && surat.jenis_surat ? surat.jenis_surat.nama : "surat ini";
+        const nomor =
+          surat && surat.nomor_surat ? ` (Nomor: ${surat.nomor_surat})` : "";
 
         let pesan = `Yakin mau menghapus ${jenis}${nomor}?\n\nData yang sudah dihapus tidak bisa dikembalikan.`;
-        if (surat && surat.jenis_surat && surat.jenis_surat.kode === "KEMATIAN" && surat.status === "disetujui") {
-          pesan += "\n\nPERHATIAN: data penduduk untuk surat kematian ini sudah terhapus. Surat ini adalah satu-satunya catatan yang tersisa.";
+        if (
+          surat &&
+          surat.jenis_surat &&
+          surat.jenis_surat.kode === "KEMATIAN" &&
+          surat.status === "disetujui"
+        ) {
+          pesan +=
+            "\n\nPERHATIAN: data penduduk untuk surat kematian ini sudah terhapus. Surat ini adalah satu-satunya catatan yang tersisa.";
         }
         if (!confirm(pesan)) return;
 
@@ -972,7 +1305,9 @@ document.addEventListener("DOMContentLoaded", () => {
         btn.textContent = "Menghapus...";
 
         try {
-          const res = await fetch(`${API_BASE_URL}/api/surat/${id}`, { method: "DELETE" });
+          const res = await fetch(`${API_BASE_URL}/api/surat/${id}`, {
+            method: "DELETE",
+          });
           const hasil = await res.json();
 
           if (!hasil.sukses) {
