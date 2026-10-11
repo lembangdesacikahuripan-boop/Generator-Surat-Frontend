@@ -647,6 +647,9 @@
             >
               <tr>
                 <th class="p-3 font-label-caps text-label-caps text-secondary">
+                  No.
+                </th>
+                <th class="p-3 font-label-caps text-label-caps text-secondary">
                   NIK
                 </th>
                 <th class="p-3 font-label-caps text-label-caps text-secondary">
@@ -665,6 +668,26 @@
             </thead>
             <tbody id="tabel-penduduk-body"></tbody>
           </table>
+        </div>
+        <div
+          class="flex items-center justify-between gap-4 p-3 font-body-sm text-secondary"
+        >
+          <span id="info-penduduk">Memuat data...</span>
+          <div class="flex items-center gap-2">
+            <button
+              id="btn-prev-penduduk"
+              class="px-3 py-1 border border-soft-accent rounded cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
+            >
+              Sebelumnya
+            </button>
+            <span id="halaman-penduduk"></span>
+            <button
+              id="btn-next-penduduk"
+              class="px-3 py-1 border border-soft-accent rounded cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
+            >
+              Berikutnya
+            </button>
+          </div>
         </div>
       </section>
 

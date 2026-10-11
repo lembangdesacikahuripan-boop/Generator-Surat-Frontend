@@ -965,38 +965,59 @@ document.addEventListener("DOMContentLoaded", () => {
   muatJenisSurat();
   pulihkanDraf();
 
-  // ============ DATA PENDUDUK: LIST ============
-  let semuaPendudukCache = []; // simpan data lengkap, dipakai untuk filter pencarian
+  // ============ DATA PENDUDUK: LIST (per halaman) ============
+  const PER_HALAMAN_PENDUDUK = 50;
+  let halamanPenduduk = 1;
+  let totalPenduduk = 0;
+  let kataKunciPenduduk = "";
 
   async function muatDaftarPenduduk() {
+    const params = new URLSearchParams({
+      halaman: halamanPenduduk,
+      per_halaman: PER_HALAMAN_PENDUDUK,
+    });
+    if (kataKunciPenduduk) params.set("cari", kataKunciPenduduk);
+
     try {
-      const res = await fetch(`${API_BASE_URL}/api/penduduk`);
+      const res = await fetch(`${API_BASE_URL}/api/penduduk?${params}`);
       const hasil = await res.json();
       if (!hasil.sukses) return console.error(hasil.pesan);
 
-      semuaPendudukCache = hasil.data;
-      renderTabelPenduduk(semuaPendudukCache);
+      totalPenduduk = hasil.total || 0;
+
+      // Kalau halaman ini jadi kosong (misal setelah hapus data terakhir), mundur 1 halaman
+      if (hasil.data.length === 0 && halamanPenduduk > 1) {
+        halamanPenduduk--;
+        return muatDaftarPenduduk();
+      }
+
+      renderTabelPenduduk(
+        hasil.data,
+        (halamanPenduduk - 1) * PER_HALAMAN_PENDUDUK,
+      );
+      perbaruiPaginasiPenduduk(hasil.data.length);
     } catch (err) {
       console.error("Error muat penduduk:", err);
     }
   }
 
-  function renderTabelPenduduk(data) {
+  function renderTabelPenduduk(data, mulai = 0) {
     const tbody = document.getElementById("tabel-penduduk-body");
     tbody.innerHTML = "";
     penddukCache = {};
 
     if (data.length === 0) {
-      tbody.innerHTML = `<tr><td colspan="5" class="p-6 text-center text-secondary font-body-sm">Tidak ada data yang cocok</td></tr>`;
+      tbody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-secondary font-body-sm">Tidak ada data yang cocok</td></tr>`;
       return;
     }
 
-    data.forEach((p) => {
+    data.forEach((p, i) => {
       penddukCache[p.id] = p;
       const tr = document.createElement("tr");
       tr.className =
         "border-b border-soft-accent hover:bg-surface-container-low";
       tr.innerHTML = `
+                    <td class="p-3 font-body-sm text-secondary">${mulai + i + 1}</td>
                     <td class="p-3 font-body-sm">${p.nik}</td>
                     <td class="p-3 font-body-sm">${p.nama}</td>
                     <td class="p-3 font-body-sm">${p.alamat || "-"}</td>
@@ -1017,21 +1038,48 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // ============ PENCARIAN PENDUDUK ============
-  document.getElementById("cari-penduduk").addEventListener("input", (e) => {
-    const kataKunci = e.target.value.trim().toLowerCase();
-
-    if (!kataKunci) {
-      renderTabelPenduduk(semuaPendudukCache);
-      return;
-    }
-
-    const hasilFilter = semuaPendudukCache.filter(
-      (p) =>
-        p.nama.toLowerCase().includes(kataKunci) || p.nik.includes(kataKunci),
+  function perbaruiPaginasiPenduduk(jumlahDiHalaman) {
+    const totalHalaman = Math.max(
+      1,
+      Math.ceil(totalPenduduk / PER_HALAMAN_PENDUDUK),
     );
+    const dari =
+      totalPenduduk === 0
+        ? 0
+        : (halamanPenduduk - 1) * PER_HALAMAN_PENDUDUK + 1;
+    const sampai = dari === 0 ? 0 : dari + jumlahDiHalaman - 1;
+    const angka = (n) => n.toLocaleString("id-ID");
 
-    renderTabelPenduduk(hasilFilter);
+    document.getElementById("info-penduduk").textContent =
+      `Menampilkan ${angka(dari)}–${angka(sampai)} dari ${angka(totalPenduduk)} penduduk`;
+    document.getElementById("halaman-penduduk").textContent =
+      `Halaman ${angka(halamanPenduduk)} / ${angka(totalHalaman)}`;
+    document.getElementById("btn-prev-penduduk").disabled =
+      halamanPenduduk <= 1;
+    document.getElementById("btn-next-penduduk").disabled =
+      halamanPenduduk >= totalHalaman;
+  }
+
+  document.getElementById("btn-prev-penduduk").addEventListener("click", () => {
+    if (halamanPenduduk > 1) {
+      halamanPenduduk--;
+      muatDaftarPenduduk();
+    }
+  });
+  document.getElementById("btn-next-penduduk").addEventListener("click", () => {
+    halamanPenduduk++;
+    muatDaftarPenduduk();
+  });
+
+  // ============ PENCARIAN PENDUDUK (langsung ke database) ============
+  let jedaCariPenduduk;
+  document.getElementById("cari-penduduk").addEventListener("input", (e) => {
+    clearTimeout(jedaCariPenduduk);
+    jedaCariPenduduk = setTimeout(() => {
+      kataKunciPenduduk = e.target.value.trim();
+      halamanPenduduk = 1;
+      muatDaftarPenduduk();
+    }, 400); // tunggu berhenti mengetik dulu, supaya tidak kirim permintaan tiap huruf
   });
 
   // ============ FORM TAMBAH / EDIT ============
